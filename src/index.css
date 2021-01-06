@@ -1,13 +1,96 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	font-family: Gotham Narrow SSm A,Gotham Narrow SSm B,Rubik,Lato,Lucida Grande,Lucida Sans Unicode,Tahoma,Sans-Serif;
+	font-style: normal;
+	color: white;
+	text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+	margin: 20px;
+	background: linear-gradient(to bottom, #C02425, #F0CB35);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1 {
+	font-weight: 700;
+	font-size:5rem;
+}
+
+h2 {
+	margin-top: 1.5rem;
+	margin-bottom: 0.75rem;
+}
+
+.appContainer {
+	display: flex;
+	flex-direction: row;
+}
+
+.title {
+	width: 100%;
+	text-align: center;
+}
+
+.bucket {
+	display: flex;
+	border-radius: 8px;
+	background-color: white;
+	padding: 0.85rem;
+	flex-flow: wrap;
+	flex-direction: row;
+}
+
+.item {
+	display: inline-flex;
+}
+
+.emojiSelect {
+	font-size: 2.5rem;
+	text-transform: capitalize; 
+	margin-left: 1rem;
+	background-color: transparent;
+	color: white;
+	text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+	font-family: Gotham Narrow SSm A,Gotham Narrow SSm B,Rubik,Lato,Lucida Grande,Lucida Sans Unicode,Tahoma,Sans-Serif;
+	font-style: normal;
+	border: none;
+	text-align: center;
+	text-align-last: center;
+}
+
+.emojiSelect option {
+	color: black;
+	text-shadow: none;
+}
+
+.weightForm {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+}
+
+.extrasForm {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+}
+
+.bucketContainer {
+	margin: 0.25rem;
+	text-align: center;
+	width: 33%;
+}
+
+.bucketContainer label {
+	display: flex;
+	flex-flow: column;
+	font-size: 3rem;
+	font-weight:600;
+	margin-bottom: 0.5rem;
+}
+
+.bucketContainer input,
+.results {
+	font-size: 1.5rem;
+}
+
+.results {
+	text-transform: capitalize;
+	text-align: center;
 }
