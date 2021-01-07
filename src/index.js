@@ -81,7 +81,19 @@ class Bucket extends Component {
 	}
 	
 	handleChange(event) {
-		this.setState({value: +event.target.value});
+		let weight = event.target.value;
+		
+		if(weight.charAt(0) === "0") {
+			weight = weight.substring(1,5);
+		} else {
+			weight = weight.substring(0,4);
+		}
+		
+		if(+weight <= 0) {
+			weight = "0";
+		}
+		
+		this.setState({value: weight});
 	}
 	
 	handleEmojiChange(event) {
@@ -106,10 +118,12 @@ class Bucket extends Component {
 			<section className="bucketContainer">
 				<div className="formContainer">
 					<label>{this.props.label}</label> 
-					<input type="tel" 
+					<input type="number" 
+						inputMode="numeric"
 						value={this.state.value} 
-						maxLength="3"
-						pattern="[0-9]*"
+						min="0"
+						max="1200"
+						step="1"
 						onChange={this.handleChange} />
 				</div>
 				
