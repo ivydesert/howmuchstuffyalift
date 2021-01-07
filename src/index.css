@@ -17,6 +17,7 @@ h1 {
 	font-weight: 700;
 	font-size: 5rem;
 	text-align: center;
+	margin-bottom: 0;
 }
 
 .appContainer {
@@ -46,6 +47,36 @@ h1 {
 
 .item {
 	display: inline-flex;
+}
+
+.weightToggle {
+	text-align: center;
+	margin-top: 1rem;
+	margin-bottom: 2rem;
+}
+
+.weightToggle span {
+	padding: 0.25rem 0.75rem;
+	font-size: 1rem;
+	background-color: white;
+	color: grey;
+	text-shadow: none;
+	cursor: pointer;
+	border: 1px solid white;
+}
+
+.weightToggle span.selected {
+	color: black;
+	border: 2px solid grey;
+	font-weight: 600;
+}
+
+.weightToggle span.metric {
+	border-radius: 4px 0 0 4px;
+}
+
+.weightToggle span.imperial {
+	border-radius: 0 4px 4px 0;
 }
 
 .numbers {
@@ -150,11 +181,17 @@ h1 {
 	}
 	
 	.bucketContainer label.quantity {
-		font-size: 0.875rem;
+		font-size: 1rem;
 	}
 	
 	.results .bucket.weakShit {
 		font-size: 1.5rem;
 		padding: 1rem;
+	}
+	
+	.weightToggle {
+		text-align: center;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
 	}
 }

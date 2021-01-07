@@ -3,22 +3,40 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 const emojis = { //lbs
-	"tomato": 	{emoji: "🍅", weight: 0.4, 		title: "Tomato", 	plural: "tomatoes"},
-	"eggplant": {emoji: "🍆", weight: 1.21254, 	title: "Eggplant", 	plural: "eggplants"},
-	"potato": 	{emoji: "🥔", weight: 0.383604, title: "Potato", 	plural: "potatoes"},
-	"avocado":	{emoji: "🥑", weight: 0.330693, title: "Avocado", 	plural: "avocados"},
-	"egg": 		{emoji: "🥚", weight: 0.108125, 	title: "Egg", 		plural: "eggs"}
+	"tomato": 	{emoji: "🍅", weight: 0.4, 		title: "Tomato",},
+	"eggplant": {emoji: "🍆", weight: 1.21254, 	title: "Eggplant"},
+	"potato": 	{emoji: "🥔", weight: 0.383604, title: "Potato"},
+	"avocado":	{emoji: "🥑", weight: 0.330693, title: "Avocado"},
+	"egg": 		{emoji: "🥚", weight: 0.108125, 	title: "Egg"}
 };
 
 class App extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			metric: false
+		};
+		
+		this.handleClick = this.handleClick.bind(this);
+	}
+	
+	handleClick() {
+		this.setState({metric: !this.state.metric});
+	}
+	
 	render() {
+		
 		return(
 			<main>
 				<header className="title"><h1>How Much Ya Lift?</h1></header>
+				<div className="weightToggle">
+					<span className={`metric ${this.state.metric ? "selected" : ""}`} onClick={this.handleClick}>Metric</span>
+					<span className={`imperial ${!this.state.metric ? "selected" : ""}`} onClick={this.handleClick}>Imperial</span>
+				</div>
 				<div className="appContainer">
-					<Bucket label="Bench" defaultItem="tomato"  />
-					<Bucket label="Squat" defaultItem="avocado" />
-					<Bucket label="Deadlift" defaultItem="eggplant" />
+					<Bucket label="Bench" defaultItem="tomato" metric={this.state.metric} />
+					<Bucket label="Squat" defaultItem="avocado" metric={this.state.metric} />
+					<Bucket label="Deadlift" defaultItem="eggplant" metric={this.state.metric} />
 				</div>
 			</main>
 		);
@@ -75,7 +93,8 @@ class Bucket extends Component {
 	
 	render() {
 		let items = "";
-		let quantity = Math.floor(this.state.value / emojis[this.state.item].weight);
+		let metricCoefficient = this.props.metric ? 2.205 : 1
+		let quantity = Math.floor(this.state.value * metricCoefficient / emojis[this.state.item].weight);
 		
 		if(quantity === 0) items = "💩";
 		
@@ -89,7 +108,7 @@ class Bucket extends Component {
 					<label>{this.props.label}</label> 
 					<input type="tel" 
 						value={this.state.value} 
-						maxLength="4"
+						maxLength="3"
 						pattern="[0-9]*"
 						onChange={this.handleChange} />
 				</div>
