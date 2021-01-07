@@ -2,19 +2,21 @@ body {
 	font-family: Gotham Narrow SSm A,Gotham Narrow SSm B,Rubik,Lato,Lucida Grande,Lucida Sans Unicode,Tahoma,Sans-Serif;
 	font-style: normal;
 	color: white;
+	margin: 1rem 10rem;;
 	text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
-	margin: 20px;
 	background: linear-gradient(to bottom, #C02425, #F0CB35);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+html {
+	height: 100%;
 }
 
 h1 {
 	font-weight: 700;
-	font-size:5rem;
-}
-
-h2 {
-	margin-top: 1.5rem;
-	margin-bottom: 0.75rem;
+	font-size: 5rem;
+	text-align: center;
 }
 
 .appContainer {
@@ -29,21 +31,31 @@ h2 {
 
 .bucket {
 	display: flex;
+	justify-content: center;
+	text-align: center;
 	border-radius: 8px;
 	background-color: white;
-	padding: 0.85rem;
+	padding: 1rem;
 	flex-flow: wrap;
 	flex-direction: row;
+}
+
+.results .bucket.weakShit {
+	font-size: 4rem;
 }
 
 .item {
 	display: inline-flex;
 }
 
+.numbers {
+	display: flex;
+	justify-content: center;
+}
+
 .emojiSelect {
-	font-size: 2.5rem;
+	font-size: 2rem;
 	text-transform: capitalize; 
-	margin-left: 1rem;
 	background-color: transparent;
 	color: white;
 	text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
@@ -80,17 +92,69 @@ h2 {
 .bucketContainer label {
 	display: flex;
 	flex-flow: column;
-	font-size: 3rem;
+	font-size: 2rem;
 	font-weight:600;
 	margin-bottom: 0.5rem;
 }
 
-.bucketContainer input,
-.results {
+.bucketContainer label.quantity {
+	display: inline-flex;
+	font-size: 2rem;
+	margin-bottom: 0;
+}
+
+.results .bucket {
+	font-size: medium;
+}
+
+.bucketContainer input {
 	font-size: 1.5rem;
+	width: 70%;
+	max-width: 250px;
+	text-align: center;
 }
 
 .results {
-	text-transform: capitalize;
 	text-align: center;
+	margin-top: 3rem;
+}
+
+@media only screen and (max-width: 800px) {
+	body {
+		background-color: black;
+		margin: 1rem;
+	}
+	
+	.title h1 {
+		font-size: 1.75rem;
+	}
+	
+	.bucket {
+		padding: 0.25rem;
+	}
+	
+	.bucketContainer .formContainer label {
+		font-size: 1.25rem;
+	}
+	
+	.results {
+		margin-top: 1rem;
+	}
+	
+	.results .emojiSelect {
+		font-size: 0.875rem;
+	}
+	
+	.results .bucket {
+		font-size: x-small;
+	}
+	
+	.bucketContainer label.quantity {
+		font-size: 0.875rem;
+	}
+	
+	.results .bucket.weakShit {
+		font-size: 1.5rem;
+		padding: 1rem;
+	}
 }

@@ -13,14 +13,14 @@ const emojis = { //lbs
 class App extends Component {
 	render() {
 		return(
-			<div>
-				<h1 className="title">How Much Ya Lift?</h1>
+			<main>
+				<header className="title"><h1>How Much Ya Lift?</h1></header>
 				<div className="appContainer">
-					<Bucket label="Bench" item="tomato"  />
-					<Bucket label="Squat" item="avocado" />
-					<Bucket label="Deadlift" item="eggplant" />
+					<Bucket label="Bench" defaultItem="tomato"  />
+					<Bucket label="Squat" defaultItem="avocado" />
+					<Bucket label="Deadlift" defaultItem="eggplant" />
 				</div>
-			</div>
+			</main>
 		);
 	}
 }
@@ -31,11 +31,6 @@ class EmojiSelect extends Component {
 		this.state = {
 			value: this.props.value
 		};
-		this.handleChange = this.handleChange.bind(this);
-	}
-	
-	handleChange(event) {
-		this.setState({value: event.target.value});
 	}
 	
 	render() {
@@ -43,7 +38,7 @@ class EmojiSelect extends Component {
 		
 		let i = 0;
 		for(let e in emojis) {
-			aEmojis.push(<option key={i} value={emojis[e].title.toLowerCase()}>{emojis[e].plural}</option>)
+			aEmojis.push(<option key={i} value={emojis[e].title.toLowerCase()}>{emojis[e].emoji}</option>)
 			i++;
 		}
 		
@@ -60,7 +55,8 @@ class Bucket extends Component {
 		super(props);
 		this.state = {
 			value: 135,
-			emoji: emojis[this.props.item].emoji
+			emoji: emojis[this.props.defaultItem].emoji,
+			item: this.props.defaultItem
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleEmojiChange = this.handleEmojiChange.bind(this);
@@ -71,35 +67,42 @@ class Bucket extends Component {
 	}
 	
 	handleEmojiChange(event) {
-		this.setState({emoji: emojis[event.target.value].emoji});
+		this.setState({
+			emoji: emojis[event.target.value].emoji,
+			item: event.target.value
+		});
 	}
 	
 	render() {
 		let items = "";
-		let quantity = Math.floor(this.state.value / emojis[this.props.item].weight);
+		let quantity = Math.floor(this.state.value / emojis[this.state.item].weight);
+		
+		if(quantity === 0) items = "💩";
+		
 		for(let i = 0; i < quantity; i++) {
 			items += this.state.emoji;
 		}
 	
 		return (
-			<div className="bucketContainer">
+			<section className="bucketContainer">
 				<div className="formContainer">
 					<label>{this.props.label}</label> 
-					<input type="number" 
+					<input type="tel" 
 						value={this.state.value} 
-						min="1"
+						maxLength="4"
+						pattern="[0-9]*"
 						onChange={this.handleChange} />
 				</div>
 				
 				<div className="results">
-					{quantity > 0 && <h2>{quantity}
-					
-					<EmojiSelect handler={this.handleEmojiChange} value={this.props.item}/></h2>}
-					
-					<div className="bucket">{items}</div>
+					<div className="numbers">
+						<div><label className="quantity">{quantity}</label></div>
+						<div><EmojiSelect handler={this.handleEmojiChange} value={this.props.defaultItem}/></div>
+					</div>
+					<div className={quantity === 0 ? 'bucket weakShit' : 'bucket'}>{items}</div>
 				</div>
 				
-			</div>
+			</section>
 		);
 	}
 };
